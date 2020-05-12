@@ -16,7 +16,7 @@ spec:
   selector:
     matchLabels:
       app: fah-gpu
-  replicas: 2 # Set number of replicas to run - one replica per node
+  replicas: 1 # Set number of replicas to run - one replica per node
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -40,8 +40,8 @@ spec:
 
       containers:
         - name: fah-gpu
-          image: "richstokes20/fah-covid:latest"
-          # --run-as UID should match runAsUser value in containers securityContext
+          image: dtr.webinar.mirantis-demos.mirantis.com/launch/k8s-fah:2020.05.11
+          # --run-as UID should match runAsUser value in containers securityContext ###"richstokes20/fah-covid:latest"###
           command:
             - "/usr/bin/FAHClient"
             - "--config"
@@ -53,7 +53,7 @@ spec:
             - "--gpu=true"
           resources:
             limits:
-              nvidia.com/gpu: "1" # How many gpu's you want to donate per ndoe
+              nvidia.com/gpu: "1" # How many gpu's you want to donate per node
 
             requests:
               nvidia.com/gpu: "1"
